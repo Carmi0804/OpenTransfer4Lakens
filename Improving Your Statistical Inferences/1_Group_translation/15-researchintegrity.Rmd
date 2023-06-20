@@ -1,0 +1,187 @@
+```{r, include = FALSE}
+source("include/globals.R")
+
+library("ggplot2")
+library("reshape2")
+```
+
+# Research Integrity {#integrity}
+
+When doing research, it is important to be guided by responsible conduct of research, or more colloquially, **good research practices**. Good research practices are professional standards that have the goal to maximize the quality and reliability of research. On an abstract level beliefs about good research practices do not change substantially over time. But in practice the implementation good research practices changes as a function of social, political, and technological developments. For example, it is increasingly seen as a good research practice to share all data underlying the research you report. This was difficult before the internet, but has become much easier now free data repositories exist online. As a consequence, we increasingly see that research funders expect data collected with their grants to be open whenever possible.
+
+A distinction is made between **research integrity** and **research ethics**. Research integrity is a set of principles based on professional standards. Research ethics is a set of moral principles, such as autonomy, beneficence, non-maleficence, and justice [@gillon_medical_1994]. The principle of autonomy leads to research practices such as informed consent, the requirement to be truthful to participants, and confidentiality. From the principle of non-maleficence it follows that researchers should avoid research that harms participants, or research that is too burdensome [@varkey_principles_2021].
+
+The professional standards in Codes of Conduct for Research Integrity vary slightly between documents [@komic_research_2015]. In this chapter, I will discuss both the [European Code of Conduct for Research Integrity](https://allea.org/code-of-conduct/), and the [Netherlands Code of Conduct for Research Integrity](https://www.nwo.nl/en/netherlands-code-conduct-research-integrity). Throughout this chapter, code of conduct for research integrity will be abbreviated to 'code of conduct'. You might have to adhere to other codes of conduct, depending on where you work.
+
+As the European code of conduct states, "A basic responsibility of the research community is to formulate the principles of research, to define the criteria for proper research behaviour, to maximise the quality and robustness of research, and to respond adequately to threats to, or violations of, research integrity." Codes of conduct are always living documents, because what we believe is 'proper research behavior' changes over time. There are certain core principles you will see underlying all codes of conduct of research integrity, such as honesty, transparency, scrupulousness, accountability, reliability, respect, and independence. These underlying principles are translated into more specific behaviors that are considered proper behavior -- both for researchers, as for research institutions. Have you ever read the code of conduct? If not, then your institution is already in violation of the code of conduct, as it is their responsibility to "develop appropriate and adequate training in ethics and research integrity to ensure that all concerned are made aware of the relevant codes and regulations".
+
+The Dutch Code of Conduct for Research integrity states to "Conduct research that can be of scientific, scholarly and/or societal relevance". Of course, you might perform a study for purely *educational* purposes, and the study you perform does not have to have any additional value (although it is always nice of it does). But researchers should prevent **research waste**, where they perform studies that have little to no value. Chalmers and Glasziou [-@chalmers_avoidable_2009] discuss four sources of research waste: Choosing the wrong questions for research, doing studies that are unnecessary, or poorly designed (which is why you need to evaluate the value of the information you will collect, as explained in the chapter on [sample size justification](#power%5D)), failure to report research promptly or at all (as explained in the chapter on [bias](#bias)), and biased or unusable reports of research (which can be prevented by reporting your study so it can be included in a future [meta-analysis](#reportmeta)). The Dutch code of conduct also explicitly states researchers should "Make sure that your research design can answer the research question". As you can see, many of the topics discussed in this textbook relate to preventing research waste, and are thereby related to research integrity.
+
+As discussed in the chapter on [pregistration and transparency](#sharing) researchers should share their data when possible, which is also in the code of conduct: "As far as possible, make research findings and research data public subsequent to completion of the research. If this is not possible, establish valid reasons for their non-disclosure." As discussed below, the General Data Protection Regulation (GDPR) requires European researchers to ask permission to share data that is collected. Old informed consent forms did not have such a question, and even often stated that data would be destroyed several years after data collection. This is a good example of updated professional standards, because nowadays, it is much more common to expect data to be available alongside the published article for perpetuity. You will therefore want to make sure you use updated consent forms that allow you to share the data you collect.
+
+Younger researchers sometimes feel that their supervisors require them to act in ways that are not in line with the code of conduct. Some young researchers would not go along with such pressures, but others explicitly say they are willing to violate the code of conduct if this will get them closer to completing their PhD [@van_de_schoot_use_2021]. Others trust their supervisors to know what is the right thing to do, even though supervisors themselves might feel forced to act in ways that violate the code of conduct by *their* managers. Not surprisingly, pressuring people you have power over to violate the code of conduct is a violation of the code of conduct. For example, the Netherlands code of conduct states that "As a supervisor, principal investigator, research director or manager, refrain from any action which might encourage a researcher to disregard any of the standards in this chapter".
+
+Some researchers have noted how hypercompetition in science for research grants, as well as how researchers are individually rewarded for the number of published articles, can lead to unethical behavior [@edwards_academic_2017; @anderson_perverse_2007]. The Netherlands code of conduct stresses the importance of creating an open, safe, and inclusive research culture where researchers can discuss such pressures, as well as how to guarantee good research practices are always followed. If you want to report and discuss suspected irregularities that you perceive as a violation of the code of conduct, universities typically have both internal and external confidential advisors that you can reach out to, and sometimes it is even possible to report these suspicions completely anonymously through services such as [SpeakUp](https://peopleintouch.com/). I would highly recommend, both for scientific integrity as well as for your own well-being, to discuss problematic behavior that you encounter with people you can trust, such as a confidential advisor.
+
+We would not have problems with researchers violating the code of conduct if doing the right thing was always the easiest thing to do. Violating the code of conduct can come with immediate individual rewards, such as a higher probability of publishing a paper in a high impact journal, and it comes at long term collective costs for the reliability of scientific research, which can also impact the public's trust in science [@wingen_no_2020; @anvari_replicability_2018]. Social scientists might recognize this situation as a social dilemma, where what is best for the individual is not aligned with what is best for the collective. Changes in incentives structures can perhaps align individual and collective rewards. One way is to find and punish researchers who knowingly violate the code of conduct (for an example, see this story about [Brian Wansink](https://www.vox.com/science-and-health/2018/9/19/17879102/brian-wansink-cornell-food-brand-lab-retractions-jama)). New [bias detection tests](#p-value-meta-analysis) such as *p*-curve and *z*-curve analysis can also be used to identify researchers who have systematically used questionable research practices (discussed in the next section). In the end, even though it might sound idealistic, I believe all scientists should put science first. If you pursue a career in science at a public university you are paid by tax money to generate reliable knowledge. Nothing you do while pursuing additional goals, such as a successful career, should get in the way of the responsibility society has trusted you with, which is generating reliable and trustworthy knowledge.
+
+## Questionable Research Practices {#QRP}
+
+Although in theory all researchers should follow the code of conduct for research integrity, many researchers do not. Researchers across scientific disciplines admit to certain practices that have been dubbed 'questionable research practices'. This name is somewhat unfortunate, as most of these practices are not questionable at all, but directly violate the code of conduct. That they are nevertheless referred to as 'questionable' is mainly because many researchers were not aware of the problematic nature of these practices, and slowly needed to accept how problematic they always were.
+
+Questionable research practices generally describe practices that violate the requirement from the code of conduct to "Make sure that the choice of research methods, data analysis, assessment of results and consideration of possible explanations is not determined by non-scientific or non-scholarly (e.g. commercial or political) interests, arguments or preferences." In additional to commercial or political interests, many scientists have an interest in publishing scientific articles, as doing so is good for their career. Questionable research practices make it easier for researchers to publish their article, either because they increase the probability of being able to report statistically significant results, or because they hide imperfections, which makes the results seem more convincing than they are. These practices come at the expense of the truth.
+
+Researcher admit to engaging in questionable research practices, and depending on the community of researchers surveyed, several problematic practices are engaged in at least once by many scholars. Figure \@ref(fig:qrp) summarizes the results from 14 different surveys [@latan_crossing_2021; @swift_questionable_2022; @moran_i_2022; @agnoli_questionable_2017; @makel_both_2021; @chin_questionable_2021; @bakker_questionable_2021; @motyl_state_2017; @fiedler_questionable_2016; @fraser_questionable_2018; @john_measuring_2012; @rabelo_questionable_2020]. However, coding of open ended questions suggest there is substantial measurement error when participants answer these items, so it is unclear whether the percentages in Figure \@ref(fig:qrp) directly translate into the percentage of researchers actually engaging in questionable practices [@motyl_state_2017].
+
+Many researchers selectively publish only those results or analyses with significant results, despite the Dutch code of conduct stipulating that researchers should "Do justice to all research results obtained." and the European code of conduct stating that "Authors and publishers consider negative results to be as valid as positive findings for publication and dissemination." Registered Reports have been an important step in aligning research practices with the code of conduct when it comes to publishing null results.
+
+Researchers also flexibly analyse their data by selectively reporting conditions, measures, covariates, and a host of other data analytic strategies that inflate the Type 1 error rate, and increase the probability of obtaining a statistically significant result. Preregistration has been an important step of increasing the transparency of data-driven choices in the analyses reported in scientific articles, and allows researchers to evaluate whether any deviations from the statistical analysis plan decrease the severity of the test, or increase it [@lakens_value_2019]. With increasing awareness of the problematic nature of these practices, hopefully we will see a strong decline in their occurrence, and researchers will learn correct approaches to maintain some flexibility in their analyses (for example by replacing optional stopping by [sequential analysis](#sequential). @wigboldus_encourage_2016 make the important distinction between questionable research practices, and questionable reporting practices. Whenever in doubt, transparently reporting the decisions you made while analyzing data should give researchers all the information they need to evaluate the reported results.
+
+(ref:qrp) Self-admittance of engaging in a questionable research practices at least once from 14 surveys among a variety of samples of researchers .
+
+```{r, qrp, echo = FALSE, fig.height = 12, fig.cap="(ref:qrp)"}
+
+john <- c(45.8, 63.4, 27.7, NA, 55.9, 38.2, NA, NA, 27, 22, 3, 0.6)
+fiedler <- c(42, 34, 24, NA, 33, 40, NA, NA, 47, 22, 3, 3) #retrieved using getdata graph digitizer as data are not shared beyond the graph
+agnoli <- c(40.1, 47.9, 16.4, NA, 53.2, 39.7, NA, NA, 37.4, 22.2, 3.1, 2.3)
+motyl <- c(48, 78, 45, NA, 66, 58, NA, NA, 58, 33, 16, 2)
+rabelo <- c(54.7, 22.4, 34.5, NA, 22.4, 19.8, NA, NA, 9.1, 17.7, 4.3, 0.86)
+fraser_eco <- c(0, 64.1, NA, NA, 36.9, 24, NA, NA, 48.5, 27.3, NA, 4.5)
+fraser_evo <- c(0, 63.7, NA, NA, 50.7, 23.9, NA, NA, 54.2, 17.5, NA, 2.0)
+makel <- c(61.69, NA, NA, 67.28, 28.61, 25.48, 41.64, 49.57, 45.80, 28.66, NA, 9.69)
+bakker <- c(60, NA, NA, 64, 23.4, 34, 46, 45, 46, 24, NA, 9)
+chin <- c(43, NA, NA, 53, 14, 24, 32, 39, 29, 27, NA, 7)
+moran <- c(38.8, 34.4, 11.5, NA, 14.4, NA, NA, NA, 29.6, 11.3, NA, NA)
+swift <- c(34.8, 11.6, 3.0, NA, 11.0, 11.8, NA, NA, 14.0, 12.8, 1.2, 0) # faculty
+latan <- c(49.15, 57.63, 43.43, NA, 59.32, 42.80, NA, NA, 37.29, 22.67, 20.3, 44.70)
+garciagarzon <- c(24.6, 53.8, 27.7, NA, 20.0, 27.7, NA, NA, 43.1, 13.8, 13.8, 0) #Involved
+brachem <- c(15.2, 36.4, 17, 25.5, 11.4, 22.4, NA, NA, 12.3, 3.4, NA, 0)
+
+labels <- c("Selectively reporting\n what 'worked'", "Selectively reporting\n outcomes", "Failing to report\n all conditions", "Selectively reporting\n performed analyses", "Optional stopping", "Exclude data depending\n on impact on results", "Selectively\n including covariates", "Switch analysis\n selectively", "HARKing", "Opportunistically\n rounding p-values", "Hiding demographic\n moderators", "Falsifying data")
+
+df <- data.frame(labels, john, agnoli, motyl, rabelo, fraser_eco, fraser_evo, makel, bakker, chin, fiedler, moran, swift, latan, garciagarzon, brachem)
+
+long <- reshape2::melt(df, id.vars = c("labels"))
+long$labels <- as.factor(long$labels)
+long = subset(long, !is.na(value))
+
+
+# ggplot(long, aes(x = labels, y = value, fill = variable)) +
+#   geom_bar(stat = "identity", colour = "black", width = 0.8, position = position_dodge2(.8, preserve = "total")) +
+#   coord_flip() +
+#   theme(plot.margin = margin(0, 0, 3, 0, "cm"), plot.background = element_rect(fill = backgroundcolor), panel.background = element_rect(fill = backgroundcolor), legend.background = element_rect(fill= backgroundcolor), legend.position = c(0.3,-0.10),  legend.direction = "horizontal", legend.margin = margin(0), axis.text.y = element_text(size = 13), panel.grid.major.x = element_line( size=.1, color="black" ), axis.ticks.x = element_blank()) +
+#   ggtitle("Self-admittance rates of engaging in QRP's at least once") +
+#   scale_fill_manual(values = c("#000000", "#004949", "#009292", "#ff6db6", "#ffb6db", "#490092", "#006edb", "#b66dff", "#6db6ff", "#b6dbff", "#920000", "#924900", "#db6d00", "#24ff24", "#ffff6d", "#ffffff"),
+#                     labels = c("John 2012", "Agnoli 2017", "Motyl  2017", "Rabelo 2020", "Fraser 2018 (eco)", "Fraser 2018 (evo)", "Makel 2021", "Bakker 2021", "Chin 2021", "Fiedler 2016", "Moran 2022", "Swift 2022 (faculty)", "Latan 2021", "Garcia-Garzon 2022", "Brachem 2022"), name = "Study") +
+#   ylab("Percentage") + xlab("QRP's") +
+#   scale_y_continuous(limits = c(0, 65), breaks = seq(0, 65, 5))
+
+
+ggplot(long, aes(x = variable, y = value, fill = variable)) +
+  coord_flip() +
+  geom_bar(stat = "identity", colour = "black", width = 0.8, position = position_dodge(.8, preserve = "single")) +
+ theme(plot.margin = margin(0, 0, 0, 0, "cm"), plot.background = element_rect(fill = backgroundcolor), panel.background = element_rect(fill = backgroundcolor), legend.background = element_rect(fill= backgroundcolor), legend.direction = "horizontal", legend.position = "bottom", axis.title = element_text(size = 13), axis.text.x = element_text(size = 10), axis.text.y = element_text(size = 20), panel.grid.major.x = element_line(size = .1, color = "black"), axis.ticks.x = element_blank()) +
+  ggtitle("Self-admittance rates of engaging in QRP's at least once") +
+  scale_fill_manual(values = c("#000000", "#88CCEE", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", "#E69F00", "#44AA99", "#999933", "#882255", "#661100", "#6699CC", "#888888", "#ffffff"),
+                    labels = c("John 2012", "Agnoli 2017",  "Motyl  2017", "Rabelo 2020", "Fraser 2018 (eco)", "Fraser 2018 (evo)", "Makel 2021", "Bakker 2021", "Chin 2021", "Fiedler 2016", "Moran 2022", "Swift 2022 (faculty)", "Latan 2021", "Garcia-Garzon 2022", "Brachem 2022"), name = "Study") +
+  ylab("Percentage") + xlab("QRP's") +
+  scale_y_continuous(limits = c(0, 70), breaks = seq(0, 70, 10)) + 
+  facet_wrap(~labels, scales = "free_x", switch = "y", nrow = 4) +
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), strip.background = element_blank(), strip.text.y = element_text(size = 12))
+
+
+```
+
+## Fabrication, Falsification, and Plagiarism
+
+Beyond questionable research practices, fabricating data is making up results and recording them as if they were real, and falsification is manipulating manipulating aspects of research, including data, without any scientific justification. Data fabrication is a research practice that is outright dishonest. There have been a [substantial number of cases](https://en.wikipedia.org/wiki/List_of_scientific_misconduct_incidents) where researchers have fabricated complete datasets in dozens of experiments. Some examples were already mentioned in the chapter on [bias detection](#bias). It can be difficult to prove fabrication, as researchers often keep bad records of data collection. For example, Susannah Cahalan makes a convincing case in her book '[The Great Pretender](https://www.npr.org/2019/11/13/777172316/the-great-pretender-investigates-a-landmark-moment-in-psychiatric-history)' that the famous study by David Rosehan '[On being sane in insane places](https://en.wikipedia.org/wiki/Rosenhan_experiment#Accusation_of_hoax)' was largely made up. In the study, healthy confederates who pretended to hear voices were admitted as in-patients suffering from schizophrenia. Her detailed investigation raises severe doubts the study was performed as described (see also @scull_rosenhan_2023).
+
+One might hope falsification and fabrication is rare, but a recent large scale survey in The Netherlands yielded prevalence estimates around 4% [@gopalakrishna_prevalence_2022]. Data fabrication can also occur on a smaller scale. Imagine collecting data for a study. As part of the study, it is your task to ask the age of participants and their gender, for the demographic statistics to be reported when describing the sample. After collecting all the data, you notice you have forgotten to collect the demographic data for two individuals. You might be tempted to, based on your memory, guess the demographic statistics of these two individuals, to not have to admit you have made a mistake during the data collection when you wrote up the demographic information. However, this would also constitute data fabrication. You should instead transparently mention a mistake was made. Mistakes happen, and it is important to create a culture where people can admit mistakes, so that we can learn from them and prevent them in the future [@bishop_fallibility_2018].
+
+Note that it can be fine to **simulate** data to perform a power analysis -- one should just not present such data as if it was collected from real participants. The Dutch code of conduct states: "Do not fabricate data or research results and do not report fabricated material as if it were fact. Do justice to all research results obtained. Do not remove or change results without explicit and proper justification. Do not add fabricated data during the data analysis."
+
+The European code of conduct defines plagiarisms as: using other people's work and ideas without giving proper credit to the original source, thus violating the rights of the original author(s) to their intellectual outputs." It is possible to re-use text, but the source should be cited, and quotation marks should be used to identify the text as a quote from another source. A special case of plagiarism is 'self-plagiarism' or text recycling where the same text by the same author is used in different articles. There is disagreement about how problematic this practice is [@bird_self-plagiarism_2008], which is to be expected, as there will always be some academics with a diverging opinion. In general, researchers are not supposed to re-use large portions of previous work and present it as new work just to increase their number of published articles. But many researchers believe it is perfectly fine to re-use descriptions from method sections if you need to communicate the same information in a new paper [@pemberton_text_2019]. The guidelines by the Committee on Publication Ethics (COPE) similarly [state](https://publicationethics.org/text-recycling-guidelines):
+
+> The guidelines cover how to deal with text recycling both in a submitted manuscript and a published article and include situations where text recycling may be acceptable as well as those where it is unlikely to be. For example, it may be entirely appropriate to have overlap in a methods section of a research article (referring to a previously used method) with citation of the original article. However, undisclosed overlap, or overlap in the results, discussion, or conclusions is unlikely to be acceptable.
+
+Self-plagiarism is thus mainly seen as problematic when researchers use it to publish very similar content multiple times purely to make it look like they are more productive.
+
+There are additional problematic research practices beyond fabrication, falsification, plagiarism, and QRP's. @gopalakrishna_prevalence_2022 also considered behavior such as insufficiently mentoring or supervising junior researchers, unfairly reviewing articles or grants, and inadequate note-taking of the research done as questionable practices.
+
+## Informed consent and data privacy
+
+When collecting data from participants outside of naturalistic observations in the public space, they should consent to participate in research. A consent form that participants read and sign before data collection is important both for research ethics, as for data privacy. The consent form explains the goal of the study, highlights that participation is voluntary and that participants can stop when they want, explains any risks and benefits (such as payment), informs them about data privacy issues, and details who participants can contact if there are any issues with the study.
+
+Consent is also the legal basis for the use of personal data in the General Data Protection Regulation ([GDPR](https://gdpr.eu/)). The consent form should identify the data controller and the contact details of the Data Protection Officer, and a description of the participants' rights (e.g., to withdraw the data up to a certain amount of time after the study), and information about where and how long data is stored and shared [@hallinan_information_2023]. According to the GDPR there are special categories of personal data that you can only collect with informed consent, such as racial or ethnic origin, political opinions, religious or philosophical beliefs, genetic or biometric data data, and questions about a person's sex life or sexual orientation. When collecting such data, it should be necessary for the research purpose. Data privacy officers at your university can assist you in this process.
+
+Open data is important - but it is essential to maintain data privacy when sharing data in a public repository. This means carefully removing any personal identifiers (names, IP addresses, ID numbers of participants from data panels, etc) from the dataset before publicly sharing the data. If you use a version control system make sure that the identifying information is absent from the initial version of the data files you will share, as other users will not just have access to the latest version of the file, but also to the complete file history. For a good overview on the GDPR and research, see this information from [Groningen University](https://www.rug.nl/digital-competence-centre/privacy-and-data-protection/gdpr-research/).
+
+## 利益冲突
+
+研究中的 **利益冲突**是指，在研究人员对研究结果感兴趣的情况下，可能导致个体利益差异、从而妨碍真正知识的产出的情形。利益冲突的一个核心特征是存在两种相互竞争的利益：其中一种来自做好的研究，另一种来自不做好的研究。例如一名研究人员可能作为一家公司的顾问获得额外收入，同时从事一项评估该公司生产的产品的工作，如一种新药的研究。如果研究表明该药物与现有药物相比没有任何益处，研究人员可能会担心诚实地告知这一研究发现会使公司决定不再雇佣他们作为顾问。或者一名研究人员可能为一个宣传组织工作，并对一个主题进行调研，有多少人受到这个主题的影响？其中高估计可能符合宣传组织的利益。由此可以产生一个观点，科学家无论何时发表科学论文都存在利益冲突，因为发表论文对科学家的职业生涯有好处，而研究（在......的时候）更容易发表（译者注：原文不详）。
+
+单纯的利益冲突并不违反行为准则，只要研究人员对此保持透明即可。欧洲行为准则规定："所有作者必须披露任何利益冲突，以及对研究或发表其结果的经济或其他类型的支持。"当你审查同行的科学工作，例如基金申请提案或科学文章时，也可能会出现利益冲突。在这里私人关系可能会成为利益冲突，要么是因为你与一位研究人员是非常亲密的朋友，要么是因为你觉得另一位研究人员是敌对者或竞争对手。在这些情况下，你应该再次声明你的利益冲突，期刊编辑或基金审查小组通常会尝试去找另一名审查人员。
+
+## 研究伦理 {#伦理}
+
+在你进行研究之前，大多数机构会要求你获得**伦理审查委员会**(ERB)的许可，它有时也被称为机构审查委员会（IRB）。特定类型的研究可能会由专门的委员会进行审查。例如医学研究由医学伦理审查委员会（METC）审查，动物研究由动物伦理委员会审查。伦理审查的目的是平衡以下两个目标：保护受试者，使研究有益于社会[@whitney_balanced_2016]。《赫尔辛基宣言》为评估人类受试者参与的研究提供了重要依据。它强调了个体的自主权，以及参与或停止参与研究的知情同意权。
+
+《赫尔辛基宣言》建立在《纽伦堡法典》[Nuremberg Code](https://en.wikipedia.org/wiki/Nuremberg_Code)的基础上，后者是二战后制定的一套道德原则，旨在回应纳粹医生未经同意对集中营中的受监禁者进行的不道德研究（关于这种不道德研究是否可以使用和引用的道德讨论参见 @caplan_how_2021 和 @moe_should_1984）。 另一个对人体进行不道德实验的例子是塔斯克吉梅毒研究[Tuskegee syphilis study](https://en.wikipedia.org/wiki/Tuskegee_Syphilis_Study)该研究纳入了400名患有梅毒的非裔美国男性，以检验这种疾病在未经治疗时的影响。被纳入研究的男性没有同意不接受治疗，也没有得知对他们疾病的诊断。这项研究最终持续了40年。尽管在大学进行的大多数研究的有害风险要低得多，但相较于其对科学的益处，评估研究对被试可能造成的危害仍然很重要。研究人员可能会展示负面刺激或要求被试记住他们在研究中经历的负面事件，这些事件仍然会有伤害性风险。在设计研究时可能有同样有效的替代方案，仍然可以让研究人员回答他们的研究问题。除了防止伤害之外，研究人员还必须告知被试有关研究的情况，并征得他们的同意。知情同意书中的信息应真实。如果有必要在知情同意书中就他们将要进行的研究向被试撒谎（例如被试认为他们将与其他被试互动，但这些人实际上是研究人员的同谋和研究的一部分），那么研究人员应该在数据收集完成后，进行**事后情况说明**。研究人员还应为被试**保密**。如果研究者计划在公共数据库中共享数据，在收集开放性问题时应尤其注意。
+
+## 测试自己
+
+**问题1**：请尝试用一句话来定义"捏造数据"。这句话的开头可以是"捏造数据的方式有很多，比如说......"。你的定义应该包括所有形式的不诚实的捏造数据，但不应该包括诚实的形式，比如*模拟*数据集。
+
+**问题2**：想象一下，你正在分析你的数据，在使用电脑进行的一项实验中，一名被试在一个输入文本的问题中把年龄输入为117岁。虽然达到这个年龄不是不可能的，但被试更有可能是想输入17这个值。应该把这个值改成17吗？现在想象一下，你已经用你电脑上的系统时钟测量了人们浏览一个网站的时间（以秒为单位），极其准确，在时间测量上完全可靠。这项研究有一个实验条件和一个控制条件。两组间差异无统计学意义。但是如果你将一个在控制条件下的被试的数据从117秒更改为17秒，组间的差异在统计学上是显著的，将证实你在设计实验时做出的假设。
+
+这两种情况有什么不同呢？为什么117秒到17秒的时间记录违反了科研诚信的行为准则？荷兰科研诚信行为准则有整整三个自然段在阐述这一问题。如果你将这一位被试的年龄从117更改为17后写下被试的平均年龄，当这个数字是基于你更改的数据时，除了"被试的平均年龄为20.4岁"这一声明之外，你还需要提供什么？
+
+**问题3**: 有时报告结果，其余时候不报告结果的做法被称为**选择性报告**。说到选择性报告，最重要的还是在于研究者的意图。不报告一项有缺陷的研究可能是有意义的（例如实验中存在编程错误，或者所有被试都误解了指导语，提供了无用的输入）。不广而告之地报告一项设计有问题的研究也可能是有道理的------例如，你认为一项操作会产生特定的效果，但该操作并没有达到预期的效果。然而，即使是这样的数据也可能对其他人有用，知道你认为会产生特定效果的操作没有效果，可能会防止其他人在未来犯同样的错误。如果以某种方式分享这样的结果，至少有时对科学是有益的。但是正如我们下面将看到的，研究人员也会根据结果是否在统计学意义上显著而选择性地报告研究。
+
+一位科学家进行了几项实验，但只分享了那些在看完结果后得出了支持他们假设的结果的实验。这位科学家从不分享那些不能支持他们假设的实验结果。你认为这位科学家的行为在道德上是可接受的还是不可接受的？
+
+**问题4**：一位科学家进行了几项实验，但只分享了那些在看完结果后被认为是设计良好的实验的结果。这位科学家从不分享那些在看了数据后被判定为设计不良的实验的结果。你认为这位科学家的行为在道德上是可接受的还是不可接受的？
+
+**问题5**：一位科学家在进行一项实验时，对几个因变量进行了多种方式的分析，但只分享了那些在看了结果后得出了支持他们假设的结果的分析。这位科学家从不分享那些不能支持他们的假设的分析结果。你认为这位科学家的行为在道德上是可接受的还是不可接受的？
+
+目前的实践是，研究人员的确在有选择性地报告研究。Franco等人 @franco_publication_2014 对一项大型的全国范围内协作的代表性调查中的106项研究进行了分析，他们发现当研究结果是效应不显著时，有31项研究没有被写完，有7项研究写完了但还没有发表，只有10项得到发表。当结果显示出统计学上显著的效应时，仅有4项研究没有被写完，有31项研究写完了但还没有发表，有56项得到发表。有明确的证据表明，研究人员选择性地报告了证实他们假设的结果，正如我们在关于[偏倚](#偏倚)的一章中讨论的那样。
+
+Pickett和Roche最近的一项研究[-@pickett_questionable_2017]调查了公众对捏造数据和选择性报告的看法。下表总结了他们的研究结果。可以看到有很大一部分公众认为选择性报告在道德上是不可接受的（71%的人认为在道德上不可接受），大多数公众认为这样做应该有后果（比如，73%的人认为这样的研究人员应该被禁止资助）。Pickett和Roche研究中的这些百分比在多大程度上反映了你对选择性报告在道德上可接受或不可接受程度的判断？
+
+图15.2:来自Pickett和Roche（2017）的表格，显示了公众眼中对数据伪造和捏造、选择性报告的道德判断。
+
+```{r pickettroche, fig.margin = FALSE, echo = FALSE, fig.cap="(ref:pickettroche)"}
+knitr::include_graphics("images/picketroche.png")
+```
+
+**问题6**：假设Pickett和Roche观察到的结果以及图15.1\@ref(fig:qrp)总结的关于可疑研究方法的研究的结果准确且有代表性。那么在当前的研究方法和公众认为道德上可接受的研究方法之间似乎存在很大的分歧。你认为这种分歧是有问题的吗？你认为如果公众完全理解了当前与选择性报告相关的研究方法，他们会有理由对科学家的工作方式进行负面评价吗？或者你认为如果对当前的研究方法有一个很好的解释，公众会对当前的研究方法采取正面评价吗？
+
+**问题7**：考虑到研究人员承认采用了有问题的研究方法，他们肯定会有一些好处。采用有问题的研究方法有什么好处？
+
+**问题8**：采用有问题的研究方法有什么缺点？
+
+为了改进研究方法，我们已经看到许多科学领域朝着更大的透明度迈进，包括共享数据和材料，对数据分析方式的选择的清晰化，以及预注册研究。几乎不可能预防所有的学术不端行为，但提高研究的透明度，将更容易发现有问题的研究方法，如选择性报告。同时，大学需要对相关人群进行研究伦理方面的培训，确保有让研究人员（包括你！）能够安心地做正确的事情的氛围。
+
+## 给自己打分
+
+在这部分作业中，你要给自己的答案打分。你可以对照下面的参考答案（提示了好的答案可能是怎样的，尽管不一定全面；你的答案可能会包含未在下面的答案中提到的正确的部分）。通读下面的答案，并为自己的答案打分。从1（非常糟糕的答案）到10（优秀的答案）。要诚实、公正。
+
+**问题1的答案**：捏造数据的方式有很多，比如说这些数据可以被当作真实的数据，但却不是基于研究人员实际进行的真实的深入观察而来的，然而，这些数据还是被呈现为基于真实观察的数据。
+
+*给自己打分，从1分（无答案）到10分（完美答案）。你越能指出伪造的数据看起来与真实的观察结果相似，并且它们被有意地呈现为真实的，你的分数就应该越高。*
+
+**问题2的答案**：这两种情形的区别在于，在第二种情形下，研究人员有意产生与他们想要观察到的结果一致的结果。就荷兰研究诚信行为准则的原文而言，缺少的是"*明确和适当的理由*"。如果你报告的是基于17而不是117的平均值，你需要提供一个脚注或声明，表明你做了什么（"我们将一个年龄值117更改为17"）和这样做的理由（"因为我们强烈怀疑这个值是参与者的输入错误，实际上是17岁"）。
+
+*给自己打分，从1分（无答案）到10分（完美答案）。你提供的答案越全面，你的分数就应该越高（能解释基于缺乏适当理由的两种情形之间的区别，具体说明荷兰研究诚信行为准则的哪个方面在第二种情形下缺失，你需要描述你改变了什么，以及改变它的理由）。*
+
+**问题3、问题4、问题5和问题6的答案是你的个人意见，不打分。**
+
+**问题7的答案**：（1）因为他们倾向于向世界提供对他们假设的支持；（2）因为他们发表"有用"的结果比没用的结果在他们的职业生涯中获得的奖励要多得多，因此他们会把时间花在前者上；（3）即使研究人员会尝试发表这些结果，期刊也不太可能接受它们发表；（4）发表一篇故事连贯的论文更容易（只有显著的结果）。一般来说，我们可以期待有问题的研究方法在短期内为个别科学家带来好处。
+
+*给自己打分，从1分（无答案）到10分（完美答案）。你给出的理由越多，你的分数就应该越高，包括但不限于以上三种。（译者注：应是四种）*
+
+**问题8的答案**：对于单个科学家来说，有被同事发现、失去声誉（或者在极端情况下，失去工作）的风险。其他科学家无法复现他们的工作，也可能会影响他们的声誉。对社会来说，一个不利的方面是科学研究不像它应有的那样可靠。对科学来说，一个不利的方面可能是科学的声誉以及人们对科学的信任受到了损害。总的来说，我们可以预期，从长远来看，有问题的研究方法的成本是对于社会的。
+
+*给自己打分，从1分（无答案）到10分（完美答案）。你给出的理由越多，你的分数就应该越高，包括但不限于以上三种。*
+
+如果在看了这么多关于科研诚信的东西之后，你觉得需要一些东西让自己高兴起来，[这个视频](https://youtu.be/ZaNtz76dNSI)可能会有点用。
